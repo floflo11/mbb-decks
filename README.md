@@ -5,7 +5,7 @@
 
 > Real consulting decks from Claude. Not slop.
 
-Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com).
+Codified from three years in consulting drafting decks alongside ex-MBB executives. [About the author](#about-the-author).
 
 ## Without skill vs with skill
 
@@ -71,6 +71,10 @@ The exact rules and the JSON schema live in [`SKILL.md`](SKILL.md).
 
 - [`examples/data-center-landscape/`](examples/data-center-landscape/): the deck behind the comparison images above. Industry report with logos on every bullet that names a company.
 - [`examples/market-entry/`](examples/market-entry/): Vietnam JV recommendation. Owner / Action / Outcome table at the close.
+
+## About the author
+
+Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com), where she works on applied AI for finance teams. Three years at EY Transaction Economics in New York drafting decks alongside ex-MBB executives. The conventions she learned there are what this skill encodes.
 
 ## License
 
