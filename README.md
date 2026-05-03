@@ -2,23 +2,15 @@
 
 > Generate MBB-style consulting decks with Claude. Action-title storylines, pyramid-principle structure, MECE bullets, navy-and-white editorial visual system. Real `.pptx` output, not Markdown.
 
-## Side-by-side: skill output vs default AI-deck output
+## With skill vs without skill
 
-Same topic (a data center industry report), same author, same approximate length. Left is what this skill produces. Right is what a generic AI deck tool produces.
-
-**Cover (page 1)**
+Same prompt, same topic (a data center industry report), same author. **Left** is what Claude produces with this skill installed. **Right** is what Claude produces without it (the default AI-deck-tool aesthetic).
 
 ![Cover comparison](examples/data-center-landscape/compare-cover.png)
 
-**Agenda (page 3)**
-
 ![Agenda comparison](examples/data-center-landscape/compare-agenda.png)
 
-**Analytical content (page 11)**
-
 ![Content comparison](examples/data-center-landscape/compare-content.png)
-
-**Closing detail (page 15)**
 
 ![Closing comparison](examples/data-center-landscape/compare-closing.png)
 
