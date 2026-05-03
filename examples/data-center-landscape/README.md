@@ -24,11 +24,11 @@ Side-by-side comparison of an industry report rendered with the `mbb-decks` skil
 
 The skill cover makes a claim ("Where the Next $500B in Capex Lands"). The vanilla cover is a label ("Data Center Industry Report"). Same author, same topic; the first invites the reader, the second files itself away.
 
-### Chart slide (skill page 5 vs vanilla page 5)
+### Agenda (skill page 3 vs vanilla page 2)
 
-![Chart comparison](compare-chart.png)
+![Agenda comparison](compare-agenda.png)
 
-The skill version pairs the chart with a "KEY TAKEAWAYS" panel on the same slide, so the reader gets the picture and the takeaway in one view. Bars carry data labels at 1 decimal; gridlines and the y-axis numeric labels are suppressed because the bar labels carry the precision. The vanilla version uses a 3D-style pie chart for share, which every MBB style guide explicitly disrecommends, and pads it with generic side bullets ("the market leader", "strong enterprise position").
+The skill agenda is three numbered sections, each with a one-line subtitle that previews the argument of that section. The vanilla agenda is a 7-item bullet list of generic section labels ("Introduction, Market Overview, Key Players, Major Market Trends, Challenges and Opportunities, Future Outlook, Conclusion and Q&A"), with a heavy blue title bar and "CONFIDENTIAL" stamp in the footer. The first reads as a partner setting up an argument. The second reads as a default PowerPoint template.
 
 ### Analytical content (skill page 11 vs vanilla page 8)
 
