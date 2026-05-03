@@ -2,7 +2,7 @@
 
 > Real consulting decks from Claude. Not slop.
 
-Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI.
+Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com).
 
 ## Without skill vs with skill
 
@@ -64,18 +64,6 @@ The exact rules and the JSON schema live in [`SKILL.md`](SKILL.md).
 
 - [`examples/data-center-landscape/`](examples/data-center-landscape/) — the deck behind the comparison images above. Industry report with logos on every bullet that names a company.
 - [`examples/market-entry/`](examples/market-entry/) — Vietnam JV recommendation. Owner / Action / Outcome table at the close.
-
-## For developers
-
-Skip Claude Code. Render from a JSON spec directly:
-
-```bash
-git clone https://github.com/floflo11/mbb-decks
-cd mbb-decks && pip install python-pptx
-python scripts/build_deck.py path/to/spec.json out.pptx
-```
-
-Stuck? See [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
 
 ## License
 
