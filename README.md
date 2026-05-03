@@ -52,7 +52,7 @@ If the comparison above made you smile, **star this repo to follow more Microsof
 - **Word**: IC memos, board prereads, one-pagers
 - **Outlook**: partner-style email and follow-ups
 
-Stars vote on which ships first.
+[**Vote on which ships first.**](https://github.com/floflo11/mbb-decks/discussions/1) Stars on this repo measure overall momentum; the poll captures topic preference. Both signals stay on one repo.
 
 ## What's different
 
