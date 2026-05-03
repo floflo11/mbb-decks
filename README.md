@@ -26,44 +26,20 @@ Full breakdown of the conventions behind each pair lives in [`examples/data-cent
 
 ## Install
 
-This skill is designed for [Claude Code](https://claude.com/claude-code), Anthropic's command-line agent. If you don't have it yet, install it from <https://claude.com/claude-code> first.
-
-### Step 1: Install the renderer dependencies
-
-The skill writes real `.pptx` files using [`python-pptx`](https://python-pptx.readthedocs.io/). You need Python 3.9 or newer.
-
-```bash
-python3 --version          # check you have 3.9+
-pip install python-pptx    # the renderer engine
-```
-
-### Step 2: Add the skill to Claude Code
-
-Open any project folder in Claude Code (run `claude` in your terminal). Inside the prompt, paste both lines:
+This skill runs in [Claude Code](https://claude.com/claude-code). Open Claude Code (run `claude` in your terminal) and paste both lines:
 
 ```
 /plugin marketplace add floflo11/mbb-decks
 /plugin install mbb-decks
 ```
 
-The first line pulls this repo as a plugin source. The second installs the skill. Two commands is the minimum Claude Code requires for any plugin install; there is no shorter single-command path today.
+That is the entire install. Two commands is Claude Code's minimum for any plugin; there is no shorter single-command path today.
 
-### Step 3: Verify
-
-In a regular terminal:
-
-```bash
-ls ~/.claude/plugins/cache/
-# you should see a mbb-decks directory
-```
-
-### Step 4: Use it
-
-In any Claude Code session, prompt:
+Then prompt:
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
-Claude follows the workflow encoded in `SKILL.md`: drafts a ghost deck (action titles only), confirms the storyline with you, expands the JSON spec, and renders the `.pptx`. Output lands in your current working directory.
+The first time you use the skill, it checks whether Python and [`python-pptx`](https://python-pptx.readthedocs.io/) are available on your machine and tells you the exact command to run if anything is missing (typically just `pip install python-pptx`). After that, every render is one prompt.
 
 ### Updating or removing
 

@@ -20,13 +20,35 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from pptx import Presentation
-from pptx.chart.data import CategoryChartData
-from pptx.dml.color import RGBColor
-from pptx.enum.chart import XL_CHART_TYPE, XL_LABEL_POSITION, XL_LEGEND_POSITION, XL_TICK_MARK
-from pptx.enum.shapes import MSO_SHAPE
-from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
-from pptx.util import Emu, Inches, Pt
+# Friendly error if python-pptx is missing, since this is by far the
+# most common first-run failure for new users.
+if sys.version_info < (3, 9):
+    print(
+        f"ERROR: mbb-decks needs Python 3.9 or newer. You have {sys.version.split()[0]}.\n"
+        "Install a newer Python from https://www.python.org/downloads/ or via your package manager.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+try:
+    from pptx import Presentation
+    from pptx.chart.data import CategoryChartData
+    from pptx.dml.color import RGBColor
+    from pptx.enum.chart import XL_CHART_TYPE, XL_LABEL_POSITION, XL_LEGEND_POSITION, XL_TICK_MARK
+    from pptx.enum.shapes import MSO_SHAPE
+    from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
+    from pptx.util import Emu, Inches, Pt
+except ImportError as e:
+    print(
+        f"\nERROR: mbb-decks needs python-pptx, which is not installed.\n"
+        f"  Missing module: {e.name}\n\n"
+        "Install it with:\n"
+        "    pip install python-pptx\n\n"
+        "Or, if you use a different Python install:\n"
+        "    python3 -m pip install python-pptx\n",
+        file=sys.stderr,
+    )
+    sys.exit(1)
 
 
 # Visual system tokens (see reference/visual-system.md)

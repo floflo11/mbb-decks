@@ -17,6 +17,13 @@ Generate consulting-grade .pptx decks from a JSON spec. Encodes the MBB house-st
 
 Do NOT skip the ghost-deck step. It is the single biggest quality lever.
 
+0. **Verify renderer dependencies (first run only).** Before producing any deck, confirm Python 3.9+ and `python-pptx` are installed by running:
+   ```bash
+   python3 -c "import pptx; print(f'python-pptx {pptx.__version__} on Python {__import__(\"sys\").version.split()[0]}')"
+   ```
+   If this prints a version, skip to step 1. If it errors with `ModuleNotFoundError: No module named 'pptx'`, tell the user:
+   > The renderer needs `python-pptx`. Run `pip install python-pptx` in your terminal, then say "ready" and I'll continue.
+   Wait for the user to confirm before proceeding. The build script also fails gracefully with the same install message if you skip this check, but checking up front gives a cleaner experience.
 1. **Ghost deck.** Produce only the action titles for every slide (cover, executive summary headline, agenda items, every content slide's action title, recommendation headline). Read them top to bottom as a paragraph. They must form one coherent argument: situation → complication → resolution, or claim → evidence → recommendation.
 2. **Confirm with the user.** Show the ghost deck. Ask: "Does this storyline land? Anything to add, cut, or reorder before I expand?" Wait for confirmation.
 3. **Expand.** Fill in bullets, charts, footnotes, sources. Keep each slide MECE under its action title.
