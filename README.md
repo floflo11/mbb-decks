@@ -20,26 +20,62 @@ Full breakdown of the conventions behind each pair lives in [`examples/data-cent
 
 ## Install
 
-Inside Claude Code, two commands:
+This skill is designed for [Claude Code](https://claude.com/claude-code), Anthropic's command-line agent. If you don't have it yet, install it from <https://claude.com/claude-code> first.
+
+### Step 1: Install the renderer dependencies
+
+The skill writes real `.pptx` files using [`python-pptx`](https://python-pptx.readthedocs.io/). You need Python 3.9 or newer.
+
+```bash
+python3 --version          # check you have 3.9+
+pip install python-pptx    # the renderer engine
+```
+
+### Step 2: Add the skill to Claude Code
+
+Open any project folder in Claude Code (run `claude` in your terminal). Inside the Claude Code prompt, type these two slash commands one at a time:
 
 ```
 /plugin marketplace add floflo11/mbb-decks
+```
+
+This pulls this repo and registers it as a plugin source. Takes a few seconds.
+
+```
 /plugin install mbb-decks@mbb-decks
 ```
 
-That registers this repo as a Claude Code plugin marketplace and installs the `mbb-decks` skill. You also need Python 3.9+ and `python-pptx` for the renderer to work:
+This installs the `mbb-decks` skill from the marketplace you just added. The syntax is `<plugin-name>@<marketplace-name>`; both happen to be `mbb-decks` in this repo.
+
+### Step 3: Verify
+
+In a regular terminal:
 
 ```bash
-pip install python-pptx
+ls ~/.claude/plugins/cache/
+# you should see a mbb-decks directory
 ```
 
-Then in Claude Code:
+### Step 4: Use it
+
+In any Claude Code session, prompt:
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
-Claude drafts a ghost deck (action titles only), confirms the storyline with you, then expands the JSON spec and renders the `.pptx`.
+Claude follows the workflow encoded in `SKILL.md`: drafts a ghost deck (action titles only), confirms the storyline with you, expands the JSON spec, and renders the `.pptx`. Output lands in your current working directory.
 
-### Try the worked example
+### Updating or removing
+
+Inside Claude Code:
+
+```
+/plugin update mbb-decks@mbb-decks      # pull latest version
+/plugin uninstall mbb-decks@mbb-decks   # remove the skill
+```
+
+## Skip Claude Code: render decks from a JSON spec
+
+If you don't use Claude Code and just want the renderer, clone the repo and run the build script directly with a hand-written spec:
 
 ```bash
 git clone https://github.com/floflo11/mbb-decks
@@ -47,10 +83,13 @@ cd mbb-decks
 pip install python-pptx
 mkdir -p out
 
+# Render the bundled examples
 python scripts/build_deck.py examples/data-center-landscape/input.json out/data-center.pptx
 python examples/data-center-landscape/build_vanilla.py out/data-center-vanilla.pptx
 open out/data-center.pptx out/data-center-vanilla.pptx  # macOS
 ```
+
+Use [`examples/data-center-landscape/input.json`](examples/data-center-landscape/input.json) as a template and follow the schema in [`SKILL.md`](SKILL.md) to write your own spec.
 
 ## Why this exists
 
