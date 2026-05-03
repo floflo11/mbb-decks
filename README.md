@@ -1,5 +1,8 @@
 # MBB Decks
 
+[![Star on GitHub](https://img.shields.io/github/stars/floflo11/mbb-decks?style=social)](https://github.com/floflo11/mbb-decks/stargazers)
+[![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
+
 > Real consulting decks from Claude. Not slop.
 
 Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com).
@@ -36,14 +39,18 @@ The first time the skill runs it self-checks for Python and `python-pptx`, and t
 ## Star to follow
 
 <p align="center">
-  <img src="docs/star-this-repo.png" alt="Click the Star button at the top of this page" width="280" />
+  <a href="https://github.com/floflo11/mbb-decks">
+    <img src="docs/star-this-repo.png" alt="Click the Star button at the top of this page" width="280" />
+  </a>
 </p>
+
+<p align="center"><strong>↑ Click the Star button at the top of this page</strong></p>
 
 If the comparison above made you smile, **star this repo to follow more Microsoft Office skill releases**. Coming next:
 
-- **Excel** — three-statement models, LBO, sensitivity tables, valuation builds
-- **Word** — IC memos, board prereads, one-pagers
-- **Outlook** — partner-style email and follow-ups
+- **Excel**: three-statement models, LBO, sensitivity tables, valuation builds
+- **Word**: IC memos, board prereads, one-pagers
+- **Outlook**: partner-style email and follow-ups
 
 Stars vote on which ships first.
 
@@ -62,8 +69,8 @@ The exact rules and the JSON schema live in [`SKILL.md`](SKILL.md).
 
 ## Examples
 
-- [`examples/data-center-landscape/`](examples/data-center-landscape/) — the deck behind the comparison images above. Industry report with logos on every bullet that names a company.
-- [`examples/market-entry/`](examples/market-entry/) — Vietnam JV recommendation. Owner / Action / Outcome table at the close.
+- [`examples/data-center-landscape/`](examples/data-center-landscape/): the deck behind the comparison images above. Industry report with logos on every bullet that names a company.
+- [`examples/market-entry/`](examples/market-entry/): Vietnam JV recommendation. Owner / Action / Outcome table at the close.
 
 ## License
 
