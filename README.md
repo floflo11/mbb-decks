@@ -33,19 +33,14 @@ pip install python-pptx    # the renderer engine
 
 ### Step 2: Add the skill to Claude Code
 
-Open any project folder in Claude Code (run `claude` in your terminal). Inside the Claude Code prompt, type these two slash commands one at a time:
+Open any project folder in Claude Code (run `claude` in your terminal). Inside the prompt, paste both lines:
 
 ```
 /plugin marketplace add floflo11/mbb-decks
+/plugin install mbb-decks
 ```
 
-This pulls this repo and registers it as a plugin source. Takes a few seconds.
-
-```
-/plugin install mbb-decks@mbb-decks
-```
-
-This installs the `mbb-decks` skill from the marketplace you just added. The syntax is `<plugin-name>@<marketplace-name>`; both happen to be `mbb-decks` in this repo.
+The first line pulls this repo as a plugin source. The second installs the skill. Two commands is the minimum Claude Code requires for any plugin install; there is no shorter single-command path today.
 
 ### Step 3: Verify
 
@@ -69,8 +64,8 @@ Claude follows the workflow encoded in `SKILL.md`: drafts a ghost deck (action t
 Inside Claude Code:
 
 ```
-/plugin update mbb-decks@mbb-decks      # pull latest version
-/plugin uninstall mbb-decks@mbb-decks   # remove the skill
+/plugin update mbb-decks      # pull latest version
+/plugin uninstall mbb-decks   # remove the skill
 ```
 
 ## Skip Claude Code: render decks from a JSON spec
