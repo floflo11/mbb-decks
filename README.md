@@ -18,25 +18,19 @@ Same prompt, same topic (a data center industry report), same author. **Left** i
 
 Full breakdown of the conventions behind each pair lives in [`examples/data-center-landscape/README.md`](examples/data-center-landscape/README.md). Both decks are committed to the repo so you can open them in PowerPoint or Keynote and flip through.
 
-## Quick start
+## Install
 
-```bash
-git clone https://github.com/floflo11/mbb-decks
-cd mbb-decks
-pip install python-pptx
-mkdir -p out
+Inside Claude Code, two commands:
 
-# Render the side-by-side comparison
-python scripts/build_deck.py examples/data-center-landscape/input.json out/data-center.pptx
-python examples/data-center-landscape/build_vanilla.py out/data-center-vanilla.pptx
-open out/data-center.pptx out/data-center-vanilla.pptx  # macOS
+```
+/plugin marketplace add floflo11/mbb-decks
+/plugin install mbb-decks@mbb-decks
 ```
 
-To make the skill available to Claude Code:
+That registers this repo as a Claude Code plugin marketplace and installs the `mbb-decks` skill. You also need Python 3.9+ and `python-pptx` for the renderer to work:
 
 ```bash
-cp -R . ~/.claude/skills/mbb-decks               # globally
-mkdir -p .claude/skills && cp -R . .claude/skills/mbb-decks   # or project-local
+pip install python-pptx
 ```
 
 Then in Claude Code:
@@ -44,6 +38,19 @@ Then in Claude Code:
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
 Claude drafts a ghost deck (action titles only), confirms the storyline with you, then expands the JSON spec and renders the `.pptx`.
+
+### Try the worked example
+
+```bash
+git clone https://github.com/floflo11/mbb-decks
+cd mbb-decks
+pip install python-pptx
+mkdir -p out
+
+python scripts/build_deck.py examples/data-center-landscape/input.json out/data-center.pptx
+python examples/data-center-landscape/build_vanilla.py out/data-center-vanilla.pptx
+open out/data-center.pptx out/data-center-vanilla.pptx  # macOS
+```
 
 ## Why this exists
 

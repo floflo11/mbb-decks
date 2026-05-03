@@ -1,0 +1,22 @@
+{
+  "name": "mbb-decks",
+  "owner": {
+    "name": "Iris Meng",
+    "email": "iris@newyorkailabs.com"
+  },
+  "metadata": {
+    "description": "MBB-style consulting decks for Claude. Action-title storylines, MECE bullets, chart-plus-commentary panels, company logos as bullet markers, real .pptx output.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mbb-decks",
+      "description": "Generate consulting-grade slide decks with Claude. Encodes the MBB house-style rules: action-title storyline, six-section structure, MECE bullets, chart-plus-commentary panels, company logos as bullet markers, citation discipline, and a navy-and-white editorial visual system. Renders to real .pptx files via python-pptx.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    }
+  ]
+}
