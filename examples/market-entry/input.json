@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "title": "Vietnam Market Entry: Q3 2026 Recommendation",
+    "subtitle": "Board pre-read for the August strategy committee",
+    "author": "Iris Meng",
+    "organization": "Acme Strategy Group"
+  },
+  "executive_summary": {
+    "headline": "Enter Vietnam Q3 2026 via $40M JV with Partner X for projected 3.2x return",
+    "bullets": [
+      "Vietnam offers Southeast Asia's fastest middle-class spending growth at 7% CAGR through 2030",
+      "JV structure cuts capital-at-risk by ~60% versus greenfield with a six-month launch window",
+      "Three local partners screened on distribution, regulatory, and category fit; Partner X recommended"
+    ]
+  },
+  "agenda": [
+    {"title": "Market opportunity", "subtitle": "Why Southeast Asia, why Vietnam, why now"},
+    {"title": "Entry options", "subtitle": "Greenfield, acquisition, or joint venture"},
+    {"title": "Recommendation", "subtitle": "Joint venture with Local Partner X"}
+  ],
+  "sections": [
+    {
+      "title": "Market opportunity",
+      "slides": [
+        {
+          "action_title": "SEA middle-class spending reaches $2.8T by 2030, with Vietnam and Indonesia driving 70% of growth",
+          "content_type": "bar_chart",
+          "chart": {
+            "categories": ["2020", "2025", "2030"],
+            "series": [
+              {"name": "Vietnam", "values": [180, 320, 540]},
+              {"name": "Indonesia", "values": [420, 680, 980]},
+              {"name": "Other SEA", "values": [900, 1100, 1280]}
+            ],
+            "unit": "USD billions, middle-class household consumption*"
+          },
+          "footnote": "Excludes Singapore. Middle class defined as households earning $11k to $110k per year in PPP terms.",
+          "source": "World Bank, World Development Indicators, 2024; McKinsey Global Institute, Asia 2030, 2024"
+        },
+        {
+          "action_title": "Acme's portfolio fits Vietnam's three fastest-growing categories with no Western incumbent",
+          "content_type": "bullets",
+          "bullets": [
+            "Premium dairy: 12% CAGR through 2030, fragmented competition, no dominant Western brand at the premium tier",
+            "Health and wellness: 9% CAGR, regulatory environment increasingly favorable to imported nutraceuticals",
+            "Convenience foods: 8% CAGR, modern trade penetration tripling by 2030 via 7-Eleven and GS25 expansion"
+          ],
+          "source": "Euromonitor Vietnam Consumer Outlook, 2024; Acme internal portfolio analysis, 2025"
+        }
+      ]
+    },
+    {
+      "title": "Entry options",
+      "slides": [
+        {
+          "action_title": "JV beats greenfield and acquisition on capital risk, speed, and retained operational control",
+          "content_type": "two_column",
+          "left_header": "Why JV wins on risk",
+          "left": [
+            {"icon": "$", "text": "Capital-at-risk: $40M JV vs $80M greenfield vs $120M+ acquisition"},
+            {"icon": "✓", "text": "Regulatory clearance in 4 to 6 months via partner's existing licenses"},
+            {"icon": "⬡", "text": "Distribution access from day one through partner's 12,000-store network"}
+          ],
+          "right_header": "Why JV wins on speed",
+          "right": [
+            {"icon": "→", "text": "Six-month launch versus 24 months greenfield build-out"},
+            {"icon": "●", "text": "Local hiring infrastructure already in place"},
+            {"icon": "★", "text": "Brand localization can begin during negotiation, not after close"}
+          ],
+          "source": "Acme corporate development analysis, 2025"
+        }
+      ]
+    },
+    {
+      "title": "Recommendation",
+      "slides": [
+        {
+          "action_title": "Partner X leads on distribution, regulatory, and category fit; capex governance is the only gap",
+          "content_type": "bar_chart",
+          "chart": {
+            "categories": ["Distribution", "Regulatory", "Category fit", "Capex governance*"],
+            "series": [
+              {"name": "Partner X", "values": [9.2, 8.8, 9.0, 6.5]},
+              {"name": "Partner Y", "values": [7.5, 7.0, 8.2, 8.0]},
+              {"name": "Partner Z", "values": [6.0, 8.5, 6.5, 7.5]}
+            ],
+            "unit": "Composite score, 0 to 10"
+          },
+          "footnote": "Capex governance reflects Partner X's preference for unanimous-consent thresholds; counterproposal in negotiation.",
+          "source": "Acme partner due diligence, 2025"
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "headline": "Approve $40M for the Vietnam JV with Partner X, targeting Q3 2026 launch",
+    "actions": [
+      {
+        "owner": "CFO",
+        "action": "Finalize term sheet with Partner X by 2026-08, including capex governance framework",
+        "outcome": "Capital commitment locked, board-ready terms"
+      },
+      {
+        "owner": "COO",
+        "action": "Stand up JV operations team and 24-month launch plan by 2026-09",
+        "outcome": "Launch readiness for Q3 go-live"
+      },
+      {
+        "owner": "CMO",
+        "action": "Brand localization, trade marketing plan, and category lead hires by 2026-09",
+        "outcome": "Market activation playbook"
+      },
+      {
+        "owner": "General Counsel",
+        "action": "Regulatory submission via partner's licenses, IP transfer agreements by 2026-08",
+        "outcome": "Regulatory and IP cleared for launch"
+      }
+    ]
+  },
+  "appendix": [
+    {
+      "action_title": "Vietnam JV reaches breakeven month 14, $180M revenue and 18% EBITDA margin by Year 5",
+      "content_type": "bar_chart",
+      "chart": {
+        "categories": ["Y1", "Y2", "Y3", "Y4", "Y5"],
+        "series": [
+          {"name": "Revenue", "values": [25, 65, 110, 150, 180]},
+          {"name": "EBITDA", "values": [-8, 4, 14, 24, 32]}
+        ],
+        "unit": "USD millions"
+      },
+      "footnote": "Base case. Sensitivity range +/- 25% on Year 5 revenue; refer to corporate development model.",
+      "source": "Acme corporate development model, 2026"
+    },
+    {
+      "action_title": "Partner X due diligence validates distribution and regulatory; capex governance is the only open issue",
+      "content_type": "bullets",
+      "bullets": [
+        "Distribution: 12,000 stores across 63 provinces, modern and traditional trade balance of 60/40, validated against POS data",
+        "Regulatory: holds nine of the eleven category licenses Acme requires; remaining two are partner-application-eligible",
+        "Capex governance: Partner X prefers unanimous-consent for capex over $5M; Acme counterproposal sets threshold at $15M",
+        "Financial: audited financials reviewed by Big Four; net leverage 1.8x, no covenant issues"
+      ],
+      "source": "Acme partner due diligence and external auditor review, 2025"
+    }
+  ]
+}

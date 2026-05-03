@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "Data Center Landscape 2026: Where the Next $500B in Capex Lands",
+    "subtitle": "Industry report for the Q2 2026 strategy review",
+    "author": "Iris Meng",
+    "organization": "New York AI Labs"
+  },
+  "executive_summary": {
+    "headline": "Hyperscalers will spend $500B+ through 2027, concentrating capacity in five power-rich regions",
+    "bullets": [
+      "AI training drives ~60% of incremental capex; inference workloads scale 4x by 2027",
+      "Power capacity is the binding constraint; new builds shift to TX, IA, ND, Quebec, and Riyadh",
+      "Top 4 hyperscalers control 78% of cloud spend; colocation share drops below 25% by 2027"
+    ]
+  },
+  "agenda": [
+    {"title": "Market sizing and growth", "subtitle": "How big, growing how fast, driven by what"},
+    {"title": "Competitive landscape", "subtitle": "Hyperscalers, colocation, and the new entrants"},
+    {"title": "Where the capacity is going", "subtitle": "Regional concentration and power constraints"}
+  ],
+  "sections": [
+    {
+      "title": "Market sizing and growth",
+      "slides": [
+        {
+          "action_title": "Global cloud infrastructure spend grows from $200B to $500B+ through 2027, a 17% CAGR",
+          "content_type": "bar_chart",
+          "chart": {
+            "categories": ["2020", "2022", "2024", "2026E", "2027E"],
+            "series": [
+              {"name": "Hyperscale capex", "values": [120, 175, 240, 380, 460]},
+              {"name": "Colocation capex", "values": [35, 45, 55, 70, 80]}
+            ],
+            "unit": "USD billions, annual capex"
+          },
+          "commentary": [
+            "AI training drives the acceleration: spend rises from $70B (2024) to $260B (2027), surpassing non-AI cloud capex",
+            "Inference workloads grow 4x by 2027 as enterprise adoption scales beyond pilots",
+            "Hyperscale absorbs 85% of incremental spend; colocation share contracts to ~25% by 2027",
+            "Liquid cooling moves from optional to mandatory; 70% of new hyperscale builds spec it by 2026"
+          ],
+          "footnote": "Hyperscale defined as AWS, Azure, GCP, Meta, Oracle, and Alibaba combined.",
+          "source": "Synergy Research Group, 2024; JLL Data Center Outlook, 2024; IDC Worldwide AI Infrastructure Tracker, 2024"
+        }
+      ]
+    },
+    {
+      "title": "Competitive landscape",
+      "slides": [
+        {
+          "action_title": "Top 4 hyperscalers control 78% of cloud spend; AWS leads but Azure and GCP gain share each year",
+          "content_type": "bar_chart",
+          "chart": {
+            "categories": ["AWS", "Azure", "Google Cloud", "Alibaba", "Oracle", "Other"],
+            "series": [
+              {"name": "2022 share", "values": [33.0, 22.0, 10.0, 5.0, 2.0, 28.0]},
+              {"name": "2024 share", "values": [32.0, 23.0, 11.0, 4.0, 3.0, 27.0]}
+            ],
+            "unit": "Percentage share of global cloud infrastructure spend"
+          },
+          "commentary": [
+            {"logo": "aws.amazon.com", "text": "AWS: share compressed 33% → 32% over two years; absolute dollars still grow ~25% YoY"},
+            {"logo": "microsoft.com", "text": "Azure: adds ~1pp annually; OpenAI exclusivity and enterprise integration are the wedges"},
+            {"logo": "cloud.google.com", "text": "Google Cloud: AI services drive incremental share against AWS general-purpose lead"}
+          ],
+          "source": "Synergy Research Group Cloud Infrastructure Quarterly, 2024"
+        },
+        {
+          "action_title": "Colocation remains fragmented: top 5 hold just 35% combined, with Equinix and Digital Realty leading",
+          "content_type": "bar_chart",
+          "chart": {
+            "categories": ["Equinix", "Digital Realty", "NTT", "CyrusOne", "QTS"],
+            "series": [
+              {"name": "2024 share", "values": [10.5, 7.2, 5.1, 4.0, 3.8]}
+            ],
+            "unit": "Percentage share of global colocation revenue*"
+          },
+          "commentary": [
+            {"logo": "equinix.com", "text": "Equinix: leads on retail interconnection and brand premium; trades at ~28x EBITDA"},
+            {"logo": "digitalrealty.com", "text": "Digital Realty: leads on hyperscale wholesale; trades at ~22x EBITDA"},
+            {"icon": "◆", "text": "Tier-2 metros (Atlanta, Dallas, Phoenix) are the consolidation battleground for 2026"}
+          ],
+          "footnote": "Top 5 combined; remaining 65% split across 200+ regional and specialty providers.",
+          "source": "Structure Research Global Colocation Census, 2024"
+        },
+        {
+          "action_title": "Hyperscalers move toward self-build for AI; colocation pivots to enterprise hybrid and AI startups",
+          "content_type": "two_column",
+          "left_header": "Hyperscaler strategy",
+          "left": [
+            {"icon": "$", "text": "Self-build AI campuses to capture full margin and control power, cooling, and supply chain"},
+            {"icon": "→", "text": "Vertical integration: custom silicon (Trainium, TPU, Maia), networking, optical interconnect"},
+            {"icon": "⬡", "text": "Multi-region power deals: nuclear PPAs, gigawatt-scale wind and solar contracts"}
+          ],
+          "right_header": "Colocation strategy",
+          "right": [
+            {"icon": "●", "text": "Enterprise hybrid: 60% of revenue from financial services, healthcare, and government"},
+            {"icon": "★", "text": "AI startup foundry: powered shells with pre-installed liquid cooling for unicorn customers"},
+            {"icon": "✓", "text": "Edge expansion: tier-2 metros where hyperscalers underbuild, locking in latency-sensitive customers"}
+          ],
+          "source": "JLL Data Center Outlook, 2024; company earnings filings"
+        }
+      ]
+    },
+    {
+      "title": "Where the capacity is going",
+      "slides": [
+        {
+          "action_title": "Five regions absorb 70% of new capacity; the US heartland sees the largest acceleration",
+          "content_type": "bar_chart",
+          "commentary_position": "below",
+          "chart": {
+            "categories": ["North VA", "Texas", "Iowa/ND", "Quebec", "Riyadh"],
+            "series": [
+              {"name": "2023 capacity", "values": [3.2, 1.4, 0.8, 0.5, 0.2]},
+              {"name": "2027E capacity", "values": [5.8, 4.1, 3.2, 2.4, 2.0]}
+            ],
+            "unit": "Gigawatts of contracted IT load"
+          },
+          "commentary": [
+            {"logo": "dominionenergy.com", "text": "Dominion paused new high-density requests in 2024; North VA queue stretches 7+ years"},
+            {"logo": "hydroquebec.com", "text": "Hydro-Quebec is the cleanest power option: 95% hydro grid attractive for AI training"},
+            {"logo": "midamericanenergy.com", "text": "MidAmerican (Iowa) attracts hyperscalers via long-term clean-power PPAs"},
+            {"logo": "constellationenergy.com", "text": "Constellation-Microsoft deal sets the SMR/nuclear-restart template for 2027 unlock"},
+            {"logo": "ercot.com", "text": "ERCOT (Texas) leads on speed: 18-month interconnect for projects under 200MW"},
+            {"logo": "pif.gov.sa", "text": "PIF (Saudi sovereign wealth fund) backs Riyadh: capital-rich, queue-light, gas-heavy"}
+          ],
+          "footnote": "Power, not land or fiber, is now the binding constraint; interconnect queues range from 4 to 7 years.",
+          "source": "JLL Data Center Outlook, 2024; ERCOT Capacity Outlook, 2024; Hydro-Quebec Industrial Customer Briefing, 2024"
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "headline": "Build NYAL data center exposure in Texas and Quebec; partner with colocation incumbents in tier-2 metros",
+    "actions": [
+      {
+        "owner": "Investment team",
+        "action": "Issue term sheets for two TX powered-shell sites by 2026-09; target 50MW each",
+        "outcome": "Texas footprint locked ahead of 2027 demand peak"
+      },
+      {
+        "owner": "Strategy team",
+        "action": "Negotiate Hydro-Quebec PPA with anchor tenant (Anthropic or OpenAI) by 2026-12",
+        "outcome": "Clean-power positioning, 15-year cost certainty"
+      },
+      {
+        "owner": "Partnerships",
+        "action": "Sign MSAs with Equinix and Digital Realty for tier-2 metro colocation by 2026-08",
+        "outcome": "Coverage in 12 metros without capex commitment"
+      },
+      {
+        "owner": "Capital markets",
+        "action": "Raise $1.2B preferred equity for AI-campus development by 2026-11",
+        "outcome": "Capital committed, dilution minimized"
+      }
+    ]
+  },
+  "appendix": [
+    {
+      "action_title": "Methodology: market sizing reconciles four data sources and a NYAL-built power-availability model",
+      "content_type": "bullets",
+      "bullets": [
+        "Cloud infrastructure spend reconciled across Synergy Research, IDC, Dell'Oro, and Gartner; 2024 baseline within +/- 4%",
+        "Colocation share derived from Structure Research census plus public 10-Ks for top 10 providers",
+        "Regional capacity figures triangulated from JLL, Dgtl Infra, and ERCOT/Hydro-Quebec interconnect filings",
+        "Power-availability model: 12-month rolling queue depth across 18 ISOs, mapped to hyperscaler RFP windows"
+      ],
+      "source": "NYAL data center research methodology, 2026"
+    },
+    {
+      "action_title": "Detailed hyperscaler capex by year: AWS leads in absolute dollars, Microsoft accelerates fastest in 2025-2027",
+      "content_type": "bar_chart",
+      "chart": {
+        "categories": ["2023", "2024", "2025E", "2026E", "2027E"],
+        "series": [
+          {"name": "AWS", "values": [50.0, 64.0, 88.0, 105.0, 120.0]},
+          {"name": "Microsoft", "values": [44.0, 58.0, 92.0, 115.0, 130.0]},
+          {"name": "Google", "values": [32.0, 42.0, 60.0, 72.0, 82.0]},
+          {"name": "Meta", "values": [28.0, 38.0, 58.0, 68.0, 76.0]}
+        ],
+        "unit": "USD billions, annual data center and AI capex"
+      },
+      "commentary": [
+        {"logo": "microsoft.com", "text": "Microsoft surpasses AWS in 2025 incremental capex; OpenAI partnership drives the gap"},
+        {"logo": "meta.com", "text": "Meta's 2024-2025 inflection reflects the pivot to in-house AI (Llama, AI Studio, Reels recommender)"},
+        {"logo": "cloud.google.com", "text": "Google's slower growth reflects GCP's smaller share, not strategic restraint"}
+      ],
+      "footnote": "Includes both data center construction and AI accelerator purchases; excludes traditional R&D.",
+      "source": "Company 10-Ks and quarterly capex disclosures, NYAL analysis, 2026"
+    }
+  ]
+}

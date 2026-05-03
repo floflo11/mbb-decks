@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+out/
+# PowerPoint and Keynote lock files / auto-exports
+~$*.pptx
+*.pptx.lck
+**/skill-version/Slide*.jpeg
+**/*-version/Slide*.jpeg
+# Generated decks live under out/. Example decks under examples/ are committed
+# so visitors can preview the output without running the script.
