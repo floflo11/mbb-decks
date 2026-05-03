@@ -2,7 +2,7 @@
 
 > Real consulting decks from Claude. Not slop.
 
-Action-title storylines, MECE bullets, chart-plus-commentary panels, company logos on bullets, real `.pptx` output. Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI.
+Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI.
 
 ## Without skill vs with skill
 
@@ -16,33 +16,22 @@ Same prompt, same topic (a data center industry report), same author. **Left** i
 
 ![Closing comparison](examples/data-center-landscape/compare-closing.png)
 
-Full breakdown of the conventions behind each pair lives in [`examples/data-center-landscape/README.md`](examples/data-center-landscape/README.md). Both decks are committed to the repo so you can open them in PowerPoint or Keynote and flip through.
+Both decks are committed to the repo. Open them in PowerPoint or Keynote and flip through.
 
 ## Install
 
-This skill runs in [Claude Code](https://claude.com/claude-code). Open Claude Code (run `claude` in your terminal) and paste both lines:
+In [Claude Code](https://claude.com/claude-code):
 
 ```
 /plugin marketplace add floflo11/mbb-decks
 /plugin install mbb-decks
 ```
 
-That is the entire install. Two commands is Claude Code's minimum for any plugin; there is no shorter single-command path today.
-
 Then prompt:
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
-The first time you use the skill, it checks whether Python and [`python-pptx`](https://python-pptx.readthedocs.io/) are available on your machine and tells you the exact command to run if anything is missing (typically just `pip install python-pptx`). After that, every render is one prompt.
-
-### Updating or removing
-
-Inside Claude Code:
-
-```
-/plugin update mbb-decks      # pull latest version
-/plugin uninstall mbb-decks   # remove the skill
-```
+The first time the skill runs it self-checks for Python and `python-pptx`, and tells you the one command to run if anything is missing.
 
 ## Star to follow
 
@@ -58,69 +47,35 @@ If the comparison above made you smile, **star this repo to follow more Microsof
 
 Stars vote on which ships first.
 
-## Skip Claude Code: render decks from a JSON spec
+## What's different
 
-If you don't use Claude Code and just want the renderer, clone the repo and run the build script directly with a hand-written spec:
+A consulting deck is not slides with bullets. It is an argument.
+
+This skill teaches Claude four house-style conventions:
+
+- **Action titles tell the story.** Read the headlines top to bottom; that is the deck.
+- **One claim, one chart, one slide.** With the takeaways panel beside it. Never split a chart from its commentary.
+- **Logos for companies, not letters in circles.** Real brand marks, auto-fetched, where they belong.
+- **Fifteen slides, hard cap.** Partners do not read further. Detail goes in the appendix.
+
+The exact rules and the JSON schema live in [`SKILL.md`](SKILL.md).
+
+## Examples
+
+- [`examples/data-center-landscape/`](examples/data-center-landscape/) — the deck behind the comparison images above. Industry report with logos on every bullet that names a company.
+- [`examples/market-entry/`](examples/market-entry/) — Vietnam JV recommendation. Owner / Action / Outcome table at the close.
+
+## For developers
+
+Skip Claude Code. Render from a JSON spec directly:
 
 ```bash
 git clone https://github.com/floflo11/mbb-decks
-cd mbb-decks
-pip install python-pptx
-mkdir -p out
-
-# Render the bundled examples
-python scripts/build_deck.py examples/data-center-landscape/input.json out/data-center.pptx
-python examples/data-center-landscape/build_vanilla.py out/data-center-vanilla.pptx
-open out/data-center.pptx out/data-center-vanilla.pptx  # macOS
+cd mbb-decks && pip install python-pptx
+python scripts/build_deck.py path/to/spec.json out.pptx
 ```
 
-Use [`examples/data-center-landscape/input.json`](examples/data-center-landscape/input.json) as a template and follow the schema in [`SKILL.md`](SKILL.md) to write your own spec.
-
-## Why this exists
-
-Generic AI deck tools produce label titles, bullet soup, decorative icons, pie charts, and a "Thank You" closer. Real consulting decks tell a story through action titles, prove each claim with one chart or three MECE bullets, and end on a recommendation table with named owners. This skill encodes those conventions so Claude produces decks that pass the partner-review test on the first draft.
-
-## What's different
-
-- **Ghost deck first.** Claude drafts only the action titles for the entire deck and confirms the storyline with you before expanding any body content. The single biggest quality lever.
-- **Action-title storyline.** Every slide carries a full-sentence claim, 10 to 15 words, that stands alone. Read top to bottom, the action titles tell the whole argument.
-- **Chart + commentary on the same slide.** Every chart slide carries a "KEY TAKEAWAYS" panel beside or below it. No bare-chart slides. No "chart on page 5, bullets describing it on page 6."
-- **Company logos as bullet markers.** Where a bullet focuses on a single named entity (a company, a regulator, a sovereign fund), the entity's logo replaces the bullet marker. Logos auto-fetched from the free [Hunter.io logo API](https://hunter.io/changelog/company-logo-api-free/) and cached locally. No API key, no manual sourcing.
-- **Visual system.** Georgia headlines, Calibri body, deep navy `#051C2C`, pure black rules, white background. Charts have data labels at 1 decimal on every bar; gridlines and y-axis numbers are suppressed. No em dashes. No date in footer.
-- **Citation discipline.** Every numeric claim gets a source line. Footnotes are distinct from sources and prefixed with `*`. Page numbers in the lower right as `Page X / Y`.
-- **15-slide cap** for the main deck. Detail goes to the appendix.
-
-## Use it without Claude
-
-Hand-write a JSON spec following the schema in [`SKILL.md`](SKILL.md) (use `examples/data-center-landscape/input.json` as a template), then run:
-
-```bash
-python scripts/build_deck.py path/to/your-spec.json out/your-deck.pptx
-```
-
-Pre-warm the logo cache for new companies before rendering:
-
-```bash
-python scripts/download_logos.py acme.com partner.com regulator.gov
-```
-
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| Bullets render with `•` instead of a logo | Logo fetch failed (no internet, firewall, or unknown domain) | Run `scripts/download_logos.py <domain>` manually, or check `https://logos.hunter.io/<domain>` returns a PNG in your browser |
-| PowerPoint shows "needs to repair" on open | Stale build with float EMU values | Re-render with the latest `build_deck.py` |
-| Headline overflows the right edge | Action title exceeds 110 characters at 18pt Georgia | Shorten the headline; the build script prints a warning naming the slide |
-| Chart bars have no value labels | Chart family the renderer does not yet style | Bar charts (`content_type: "bar_chart"`) are fully styled; other families fall back to defaults |
-
-## Examples in this repo
-
-- [`examples/data-center-landscape/`](examples/data-center-landscape/): industry report on the data center landscape, 15 slides, rendered both with the skill (`skill-version.pptx`) and with a generic AI-deck-tool baseline (`vanilla.pptx`). This is the deck behind the comparison images above.
-- [`examples/market-entry/`](examples/market-entry/): Vietnam joint-venture recommendation, 14 slides including appendix. Demonstrates the recommendation action table.
-
-## Contributing
-
-Pull requests welcome, especially for additional chart families, more worked examples, and theme variations. Please open an issue first for major changes.
+Stuck? See [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
 
 ## License
 
