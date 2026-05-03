@@ -4,9 +4,9 @@
 
 Action-title storylines, MECE bullets, chart-plus-commentary panels, company logos on bullets, real `.pptx` output. Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI.
 
-## With skill vs without skill
+## Without skill vs with skill
 
-Same prompt, same topic (a data center industry report), same author. **Left** is what Claude produces with this skill installed. **Right** is what Claude produces without it (the default AI-deck-tool aesthetic).
+Same prompt, same topic (a data center industry report), same author. **Left** is what Claude produces by default. **Right** is what Claude produces with this skill installed.
 
 ![Cover comparison](examples/data-center-landscape/compare-cover.png)
 
