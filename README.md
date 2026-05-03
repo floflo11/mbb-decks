@@ -82,7 +82,7 @@ The exact rules and the JSON schema live in [`SKILL.md`](SKILL.md).
 
 ## About the author
 
-Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com), where she works on applied AI for finance teams. Three years at EY Transaction Economics in New York drafting decks alongside ex-MBB executives. The conventions she learned there are what this skill encodes.
+Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New York AI Labs](https://newyorkailabs.com), where she works on applied AI for finance teams. Three years at EY NYC advising $40B+ M&A deals.
 
 ## License
 
