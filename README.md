@@ -35,51 +35,93 @@ This skill encodes those conventions so Claude produces decks that pass the part
 - **Citation discipline.** Every numeric claim gets a source line. Footnotes are distinct from sources and prefixed with `*`. Page numbers in the lower right as `Page X / Y`.
 - **15-slide cap** for the main deck. Detail goes to the appendix.
 
+## Prerequisites
+
+- **Python 3.9+** with [`python-pptx`](https://python-pptx.readthedocs.io/) installed.
+- **[Claude Code](https://claude.com/claude-code)** if you want Claude to drive the workflow end to end. You can also use the skill manually by hand-writing a JSON spec and running the renderer yourself; see "Use it without Claude" below.
+- **Internet access on first render**, so the script can auto-fetch any logo it does not find in `assets/logos/`. The 17 logos used in the worked examples are pre-cached and committed, so the bundled examples render fully offline.
+
 ## Install
 
-Requires Python 3.9+ and [`python-pptx`](https://python-pptx.readthedocs.io/).
-
 ```bash
-git clone https://github.com/<your-username>/mbb-decks
+git clone https://github.com/floflo11/mbb-decks
 cd mbb-decks
 pip install python-pptx
 ```
 
-To use the skill with Claude Code, copy the `mbb-decks` directory into `~/.claude/skills/` (or your project-local `.claude/skills/`).
+To make the skill available to Claude Code:
+
+```bash
+# Globally (every project)
+cp -R . ~/.claude/skills/mbb-decks
+
+# Or project-local (just the current repo)
+mkdir -p .claude/skills && cp -R /path/to/mbb-decks .claude/skills/
+```
 
 ## Quick start
 
 ```bash
-# Render the worked example
-python scripts/build_deck.py examples/market-entry/input.json examples/market-entry/output.pptx
-open examples/market-entry/output.pptx  # macOS
+mkdir -p out
+
+# 1. Render the side-by-side comparison so you can flip through it
+python scripts/build_deck.py examples/data-center-landscape/input.json out/data-center.pptx
+python examples/data-center-landscape/build_vanilla.py out/data-center-vanilla.pptx
+open out/data-center.pptx out/data-center-vanilla.pptx  # macOS
+
+# 2. Render the market-entry example
+python scripts/build_deck.py examples/market-entry/input.json out/market-entry.pptx
+open out/market-entry.pptx
 ```
 
-To generate your own deck, ask Claude:
+## Generate your own deck
 
-> "Build me an MBB-style deck on [topic]. Use the mbb-decks skill."
+The skill is designed to be driven by Claude Code, but the JSON-plus-script split means you can run it any way you like.
 
-Claude will produce a ghost deck (action titles only), confirm the storyline with you, then expand the JSON spec and render the `.pptx`.
+### Driven by Claude (recommended)
+
+Open Claude Code in any directory with the skill installed and prompt:
+
+> Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
+
+Claude follows the workflow encoded in `SKILL.md`:
+
+1. **Ghost deck.** Drafts only the action titles for every slide and reads them back to you as a paragraph.
+2. **Confirm.** You sign off on the storyline, ask for edits, or change the structure.
+3. **Expand.** Claude fills in bullets, charts, footnotes, sources, and selects company logos for entity-anchored bullets.
+4. **Render.** Claude writes the JSON spec to disk and runs `scripts/build_deck.py` to produce the `.pptx`.
+
+### Use it without Claude
+
+Hand-write a JSON spec following the schema in [`SKILL.md`](SKILL.md) (use `examples/data-center-landscape/input.json` as a template), then run:
+
+```bash
+python scripts/build_deck.py path/to/your-spec.json out/your-deck.pptx
+```
+
+To pre-warm the logo cache for a list of companies before rendering:
+
+```bash
+python scripts/download_logos.py acme.com partner.com regulator.gov
+```
+
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Bullets render with `•` instead of a logo | Logo fetch failed (no internet, firewall, or unknown domain) | Run `scripts/download_logos.py <domain>` manually, or check `https://logos.hunter.io/<domain>` returns a PNG in your browser |
+| PowerPoint shows "needs to repair" on open | Stale build with float EMU values | Re-render with the latest `build_deck.py`; integer-EMU coercion is now everywhere it needs to be |
+| Headline overflows the right edge | Action title exceeds 110 characters at 18pt Georgia | Shorten the headline; the build script prints a warning naming the slide |
+| Chart bars have no value labels | Old chart spec without `unit`, or a chart family the renderer does not yet style | Bar charts (`content_type: "bar_chart"`) are fully styled; other families fall back to defaults |
 
 ## Output samples
 
-The repository ships with two worked examples:
+The repository ships with two worked examples. Both have a committed `.pptx` in their folder so you can preview without running anything.
 
-- [`examples/market-entry/`](examples/market-entry/): Vietnam market entry recommendation, 14 slides including appendix. Demonstrates cover, executive summary, agenda, three section dividers, content slides with bar charts and two-column layouts (with per-bullet icons), recommendation action table, and appendix backup detail.
-- [`examples/data-center-landscape/`](examples/data-center-landscape/): **side-by-side comparison.** Industry report on the data center landscape, 15 slides, rendered both with the skill (`skill-version.pptx`) and with a deliberately generic AI-deck-tool baseline (`vanilla.pptx`). Demonstrates chart-plus-commentary panels, company logos on bullets (AWS, Microsoft, Equinix, Digital Realty, Dominion, Hydro-Quebec, ERCOT, Saudi PIF, etc.), and the below-layout 2-column commentary pattern. The README in that folder breaks down what changes and why it matters.
+- [`examples/data-center-landscape/`](examples/data-center-landscape/): industry report on the data center landscape, 15 slides, rendered both with the skill (`skill-version.pptx`) and with a deliberately generic AI-deck-tool baseline (`vanilla.pptx`). This is the deck behind the comparison images at the top. Demonstrates chart-plus-commentary panels, company logos on bullets (AWS, Microsoft, Equinix, Digital Realty, Dominion, Hydro-Quebec, ERCOT, Saudi PIF, etc.), and the below-layout 2-column commentary pattern. The folder README breaks down what changes and why it matters.
+- [`examples/market-entry/`](examples/market-entry/): Vietnam joint-venture recommendation, 14 slides including appendix. Demonstrates cover, executive summary, agenda, three section dividers, content slides with bar charts and two-column layouts (with per-bullet icons), recommendation action table, and appendix backup detail.
 
-## How the skill works
-
-| Step | What happens |
-|------|--------------|
-| 1. Trigger | User asks for an MBB deck, board pre-read, or strategy presentation |
-| 2. Ghost deck | Claude drafts action titles for every slide and shows them as a paragraph |
-| 3. Confirm | User signs off on the storyline or asks for edits |
-| 4. Expand | Claude fills in bullets, charts, footnotes, sources |
-| 5. Spec | Claude writes a JSON file with the full deck contents |
-| 6. Render | The script generates the `.pptx` |
-
-See [SKILL.md](SKILL.md) for the full workflow Claude follows.
+See [SKILL.md](SKILL.md) for the full workflow Claude follows, including the JSON schema, action-title rules, MECE-bullet conventions, and the chart-plus-commentary patterns.
 
 ## Roadmap
 
@@ -90,11 +132,11 @@ This is the first in a planned series of "house style" skills covering the four 
 - `mbb-memos`: Word documents (IC memos, board prereads, one-pagers)
 - `mbb-mail`: partner-style email and follow-ups
 
-Subscribe at [Substack link TBD] for new release announcements and a weekly post on a single MBB convention rebuilt from a famous public deck.
+A Substack covering one MBB convention per post, rebuilt from a famous public deck, is in the works. Watch this repo or follow the author on LinkedIn (below) for the launch.
 
 ## About the author
 
-Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/). Three years as a Senior Associate at EY Transaction Economics in New York, plus senior management office work at listed companies where she drafted decks alongside ex-MBB executives. This skill codifies the conventions she has spent six years working against.
+Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI. Previously: three years as a Senior Associate at EY Transaction Economics in New York, plus senior management office work at listed companies where she drafted decks alongside ex-MBB executives. This skill codifies the consulting and banking deck conventions she has spent six years working against.
 
 ## Contributing
 
