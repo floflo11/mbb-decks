@@ -4,6 +4,12 @@
 
 Action-title storylines, MECE bullets, chart-plus-commentary panels, company logos on bullets, real `.pptx` output. Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), co-founder of New York AI Labs, working at the intersection of finance and AI.
 
+## Star this repo to follow
+
+![Click the Star button at the top of this page](docs/star-this-repo.png)
+
+Companion skills for **financial models** (three-statement, LBO, sensitivity), **Word memos** (IC papers, board prereads), and **partner-style email** are in the works. Star the repo to get notified when each one ships, and to support the project on GitHub.
+
 ## Without skill vs with skill
 
 Same prompt, same topic (a data center industry report), same author. **Left** is what Claude produces by default. **Right** is what Claude produces with this skill installed.

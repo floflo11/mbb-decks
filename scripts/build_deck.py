@@ -14,7 +14,9 @@ See examples/market-entry/input.json for the canonical schema.
 from __future__ import annotations
 
 import json
+import re
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -239,6 +241,89 @@ def _add_iconed_bullets(slide, x, y, w, h, bullets, *, size=14, color=NEAR_BLACK
                   font=BODY_FONT, size=size, color=color, anchor=MSO_ANCHOR.MIDDLE, wrap=True)
 
 
+_LINK_PATTERN = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+_url_404_cache = {}
+
+
+def _http_status(url, method, timeout=4):
+    try:
+        req = urllib.request.Request(
+            url, method=method,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; mbb-decks/1.0)"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status
+    except urllib.error.HTTPError as e:
+        return e.code
+    except Exception:
+        return None  # network error / DNS / timeout
+
+
+def _is_url_404(url, timeout=4):
+    """Return True only if the URL definitively returns 404 or 410.
+
+    HEAD-rejecting sites (405, 403) are retried with GET so we don't drop
+    valid links. Network errors and timeouts are treated as 'unverifiable'
+    and the link is preserved. Result is cached.
+    """
+    if url in _url_404_cache:
+        return _url_404_cache[url]
+    status = _http_status(url, "HEAD", timeout)
+    # If HEAD is rejected (405) or auth-gated (401, 403), retry with GET
+    if status in (401, 403, 405):
+        status = _http_status(url, "GET", timeout)
+    broken = status in (404, 410)
+    _url_404_cache[url] = broken
+    if broken:
+        print(f"NOTE: source URL hidden (HTTP {status}): {url}", file=sys.stderr)
+    return broken
+
+
+def _parse_source_segments(text):
+    """Yield (segment_text, url_or_None) tuples by splitting on [text](url)."""
+    pos = 0
+    for m in _LINK_PATTERN.finditer(text):
+        if m.start() > pos:
+            yield (text[pos:m.start()], None)
+        yield (m.group(1), m.group(2))
+        pos = m.end()
+    if pos < len(text):
+        yield (text[pos:], None)
+
+
+def _add_source_line(slide, x, y, w, source_text):
+    """Render the source line with markdown-style [text](url) becoming hyperlinks."""
+    box = slide.shapes.add_textbox(x, y, w, Inches(0.3))
+    tf = box.text_frame
+    tf.margin_left = Emu(0)
+    tf.margin_right = Emu(0)
+    tf.word_wrap = True
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+
+    # "Source: " prefix
+    prefix = p.add_run()
+    prefix.text = "Source: "
+    prefix.font.name = BODY_FONT
+    prefix.font.size = Pt(8)
+    prefix.font.color.rgb = MID_GREY
+
+    for segment, url in _parse_source_segments(source_text):
+        if not segment:
+            continue
+        run = p.add_run()
+        run.text = segment
+        run.font.name = BODY_FONT
+        run.font.size = Pt(8)
+        if url and not _is_url_404(url):
+            run.hyperlink.address = url
+            # Subtle visual cue that this segment is clickable
+            run.font.color.rgb = NEAR_BLACK
+            run.font.underline = True
+        else:
+            run.font.color.rgb = MID_GREY
+
+
 def _add_footer(slide, page_num, total, *, footnote=None, source=None, show_page=True):
     body_w = SLIDE_W - M_LEFT - M_RIGHT
     if footnote:
@@ -248,8 +333,7 @@ def _add_footer(slide, page_num, total, *, footnote=None, source=None, show_page
         _add_text(slide, M_LEFT, FOOTNOTE_Y, body_w, Inches(0.25),
                   text, size=8, color=MID_GREY, italic=True)
     if source:
-        _add_text(slide, M_LEFT, SOURCE_Y, int(body_w * 0.75), Inches(0.3),
-                  f"Source: {source}", size=8, color=MID_GREY)
+        _add_source_line(slide, M_LEFT, SOURCE_Y, int(body_w * 0.75), source)
     if show_page:
         _add_text(slide, SLIDE_W - Inches(2.0) - M_RIGHT, PAGE_NUM_Y,
                   Inches(2.0), Inches(0.3),

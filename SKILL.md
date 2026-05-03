@@ -92,9 +92,49 @@ The script currently renders column-clustered charts cleanly. For other chart ty
 ## Citation format
 
 - **Inline marker** in body text: `[1]`, `[2]`, etc., when a specific number or claim needs attribution.
-- **Source line** at the bottom of the slide: `Source: [Organization], [Publication or dataset], [Year]`. Multiple sources separated by semicolons.
+- **Source line** at the bottom of the slide: `Source: [text](url); [text](url)`. Use markdown-style `[text](url)` syntax so each source is rendered as a clickable hyperlink in the `.pptx`. Multiple sources separated by semicolons. Plain text without `(url)` still works for sources that have no public URL.
 - **Footnote line** above the source: explanatory note about a number (e.g., "Excludes Singapore"). Distinct from source.
 - No source line if the slide makes no specific data claim.
+
+## Data sourcing rules (critical)
+
+The skill is only as credible as its numbers. These rules apply to every chart, every bullet, every claim with a number in it.
+
+### Always use the current year
+
+Today's date is available in your runtime context. Use it.
+
+- For historical data: cite the most recent available release. If a 2026 dataset exists, do not cite the 2023 version.
+- For forward-looking projections: forecast labels should start from the current year forward. If today is in 2026, forward years are `2026E`, `2027E`, `2028E`. Never label a past year as `E` (estimate).
+- For "as of" qualifiers in footnotes: say "as of Q[current quarter] [current year]", not a stale date.
+
+### Use only authoritative, recognized sources
+
+A short non-exhaustive list of sources Claude should reach for, by domain:
+
+| Domain | Authoritative sources |
+|--------|----------------------|
+| Macro and trade | World Bank, IMF, OECD, BIS, UN ComTrade, WTO |
+| Cloud and AI infrastructure | Synergy Research Group, IDC, Dell'Oro Group, Gartner, JLL Data Center Outlook, Structure Research |
+| Energy and climate | IEA, BloombergNEF, EIA, Lazard LCOE, NREL ATB, Wood Mackenzie |
+| Financial markets | Bloomberg, S&P Global, Refinitiv (LSEG), FactSet, Capital IQ, PitchBook, Preqin |
+| Consulting/strategy reports | McKinsey Global Institute, BCG, Bain (publicly cited), Oliver Wyman |
+| Consumer | Euromonitor, Nielsen, Kantar, eMarketer, Statista |
+| Public companies | Company 10-K, 10-Q, S-1, earnings transcripts (SEC EDGAR) |
+| Regulatory and policy | Federal Reserve, BLS, BEA, ECB, EU Commission, regulator filings |
+
+Do NOT use: random blog posts, AI-generated summaries, paywalled content without a verifiable cite, or "Statista projections" as the only source for a numeric claim.
+
+### Every source needs a clickable URL when one exists
+
+Format: `Source: [BloombergNEF Energy Transition Investment Trends, 2025](https://about.bnef.com/energy-transition-investment/); [IEA World Energy Outlook, 2024](https://www.iea.org/reports/world-energy-outlook-2024)`
+
+The build script automatically:
+- Renders each `[text](url)` segment as a hyperlink in the `.pptx`.
+- Sends a HEAD request to each URL at render time. If the URL returns a 4xx error, the link is dropped silently and only the plain text is rendered. The reader does not see a broken link.
+- Leaves the link in place for non-4xx outcomes (network timeout, DNS error, blocked HEAD), since we cannot definitively call those broken.
+
+If you cannot find a public URL for a specific report, leave the source as plain text. Do not invent URLs.
 
 ## Pairing chart with commentary
 
