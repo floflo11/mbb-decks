@@ -23,18 +23,26 @@ Both decks are committed to the repo. Open them in PowerPoint or Keynote and fli
 
 ## Install
 
-In [Claude Code](https://claude.com/claude-code):
+If you do not have Claude Code, get it first:
+
+```bash
+curl -fsSL https://claude.com/install.sh | sh
+```
+
+Then open Claude Code (run `claude` in your terminal) and paste both lines:
 
 ```
 /plugin marketplace add floflo11/mbb-decks
 /plugin install mbb-decks
 ```
 
-Then prompt:
+Now prompt:
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
-The first time the skill runs it self-checks for Python and `python-pptx`, and tells you the one command to run if anything is missing.
+The first time the skill runs it self-checks for Python and `python-pptx` and tells you the one command to run if anything is missing.
+
+> This skill is built for CLI agents (Claude Code, Codex CLI, Gemini CLI, Cursor). The `SKILL.md` format is an open standard at [agentskills.io](https://agentskills.io/specification), so the same skill works across them. A hosted web version for users who are not on a CLI agent is on the roadmap.
 
 ## Star to follow
 
@@ -56,7 +64,7 @@ If the comparison above made you smile, **star this repo to follow more Microsof
 
 ## What's different
 
-A consulting deck is not slides with bullets. It is an argument.
+> The first thing I learned in consulting: a deck is not bullet points, it is a storyline.
 
 This skill teaches Claude four house-style conventions:
 
