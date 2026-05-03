@@ -50,7 +50,13 @@ Inside Claude Code:
   <img src="docs/star-this-repo.png" alt="Click the Star button at the top of this page" width="280" />
 </p>
 
-If the comparison above made you smile, **star this repo**. Companion skills for **financial models** (three-statement, LBO, sensitivity), **Word memos** (IC papers, board prereads), and **partner-style email** ship next. Stars are how I know which one to build first.
+If the comparison above made you smile, **star this repo to follow more Microsoft Office skill releases**. Coming next:
+
+- **Excel** — three-statement models, LBO, sensitivity tables, valuation builds
+- **Word** — IC memos, board prereads, one-pagers
+- **Outlook** — partner-style email and follow-ups
+
+Stars vote on which ships first.
 
 ## Skip Claude Code: render decks from a JSON spec
 
