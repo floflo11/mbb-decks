@@ -5,7 +5,7 @@
 
 > Real consulting decks from Claude. Not slop.
 
-Codified from three years in consulting drafting decks alongside ex-MBB executives. [About the author](#about-the-author).
+Codified from three years drafting decks for $40B+ M&A deals at EY NYC. [About the author](#about-the-author).
 
 ## Without skill vs with skill
 
