@@ -14,6 +14,7 @@ See examples/market-entry/input.json for the canonical schema.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -83,9 +84,13 @@ PAGE_NUM_Y = Inches(7.0)
 
 HEADLINE_MAX_CHARS = 110     # warn if action title would wrap past one line
 
-# Logo cache for inline bullet markers (auto-fetched from Hunter.io)
+# Logo cache for inline bullet markers (auto-fetched from logo.dev)
+# logo.dev's free tier covers far more brands than Hunter.io and returns
+# real color marks instead of grayscale placeholders. Override the public
+# token by setting LOGODEV_TOKEN. The default is the project's free key.
 LOGO_CACHE_DIR = Path(__file__).resolve().parent.parent / "assets" / "logos"
-HUNTER_LOGO_URL = "https://logos.hunter.io/{domain}"
+LOGODEV_TOKEN = os.environ.get("LOGODEV_TOKEN", "pk_UYcLP0sARJOFPDtG38LnVg")
+LOGODEV_URL = "https://img.logo.dev/{domain}?token={token}&format=png&size=256"
 
 
 # ---------------------------------------------------------------------------
@@ -549,7 +554,13 @@ def _png_dimensions(path):
 
 
 def _ensure_logo(domain):
-    """Return Path to cached logo, downloading via Hunter.io if missing. None on failure."""
+    """Return Path to cached logo, downloading via logo.dev if missing. None on failure.
+
+    logo.dev returns HTTP 200 when it has a real brand mark and HTTP 202 with a
+    generic letter-tile placeholder while it backfills unknown domains. We treat
+    only 200 as a hit so the bullet falls back to plain text rather than caching
+    a placeholder forever.
+    """
     if not domain:
         return None
     LOGO_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -557,7 +568,7 @@ def _ensure_logo(domain):
     out = LOGO_CACHE_DIR / f"{safe}.png"
     if out.exists():
         return out
-    url = HUNTER_LOGO_URL.format(domain=domain)
+    url = LOGODEV_URL.format(domain=domain, token=LOGODEV_TOKEN)
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "mbb-decks/1.0"})
         with urllib.request.urlopen(req, timeout=10) as resp:
@@ -568,6 +579,10 @@ def _ensure_logo(domain):
             return None
         out.write_bytes(data)
         return out
+    except urllib.error.HTTPError as e:
+        if e.code not in (202, 404):
+            print(f"WARNING: logo fetch failed for {domain}: {e}", file=sys.stderr)
+        return None
     except Exception as e:
         print(f"WARNING: logo fetch failed for {domain}: {e}", file=sys.stderr)
         return None

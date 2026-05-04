@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-download_logos.py — Download company logos to assets/logos/ from Hunter.io.
+download_logos.py — Download company logos to assets/logos/ from logo.dev.
 
-Hunter.io's logo API (https://logos.hunter.io/{domain}) returns a 128px PNG
-for any domain. No API key, no rate limit, free.
+logo.dev returns a real brand mark for any indexed domain. HTTP 200 means
+hit, HTTP 202 means logo.dev is backfilling and is serving a generic
+letter-tile placeholder; we treat that as a miss so the cache stays clean.
+
+Override the public token by setting LOGODEV_TOKEN. The default is the
+project's free key.
 
 Usage:
     # Download a single logo
@@ -23,13 +27,16 @@ visibility into what got downloaded.
 
 from __future__ import annotations
 
+import os
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LOGO_DIR = REPO_ROOT / "assets" / "logos"
-HUNTER_URL = "https://logos.hunter.io/{domain}"
+LOGODEV_TOKEN = os.environ.get("LOGODEV_TOKEN", "pk_UYcLP0sARJOFPDtG38LnVg")
+LOGODEV_URL = "https://img.logo.dev/{domain}?token={token}&format=png&size=256"
 MIN_BYTES = 200  # smaller than this is probably an error response, not a logo
 
 
@@ -42,7 +49,7 @@ def fetch_logo(domain: str, force: bool = False) -> Path | None:
     out = LOGO_DIR / f"{safe_name(domain)}.png"
     if out.exists() and not force:
         return out
-    url = HUNTER_URL.format(domain=domain)
+    url = LOGODEV_URL.format(domain=domain, token=LOGODEV_TOKEN)
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "mbb-decks/1.0"})
         with urllib.request.urlopen(req, timeout=10) as resp:
@@ -53,6 +60,10 @@ def fetch_logo(domain: str, force: bool = False) -> Path | None:
             return None
         out.write_bytes(data)
         return out
+    except urllib.error.HTTPError as e:
+        if e.code not in (202, 404):
+            print(f"  failed: {domain}: {e}", file=sys.stderr)
+        return None
     except Exception as e:
         print(f"  failed: {domain}: {e}", file=sys.stderr)
         return None

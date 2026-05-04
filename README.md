@@ -87,3 +87,5 @@ Built by [Iris Meng](https://www.linkedin.com/in/yilin-meng/), founder of [New Y
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Logos provided by [Logo.dev](https://logo.dev). The skill ships with a shared public token. Grab your own free token at logo.dev and export `LOGODEV_TOKEN` if you want a private quota.

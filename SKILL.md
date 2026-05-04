@@ -154,7 +154,7 @@ Two layouts:
 
 ## Logos as bullet markers
 
-Wherever a commentary or two-column bullet focuses on a single named entity (company, regulator, sovereign fund), use the entity's logo as the bullet marker instead of an abstract icon or a plain dot. The skill auto-downloads logos from Hunter.io's free API (no key, no rate limit) and caches them in `assets/logos/`.
+Wherever a commentary or two-column bullet focuses on a single named entity (company, regulator, sovereign fund), use the entity's logo as the bullet marker instead of an abstract icon or a plain dot. The skill auto-downloads logos from logo.dev (a public token ships with the skill; override with `LOGODEV_TOKEN` for a private quota) and caches them in `assets/logos/`. If logo.dev does not yet have a brand mark for the domain it returns HTTP 202 and the bullet falls back to a plain `•` marker rather than a placeholder.
 
 A bullet entry can be:
 
