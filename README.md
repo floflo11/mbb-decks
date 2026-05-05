@@ -44,6 +44,14 @@ The first time the skill runs it self-checks for Python and `python-pptx` and te
 
 > This skill is built for CLI agents (Claude Code, Codex CLI, Gemini CLI, Cursor). The `SKILL.md` format is an open standard at [agentskills.io](https://agentskills.io/specification), so the same skill works across them. A hosted web version for users who are not on a CLI agent is on the roadmap.
 
+### Other agents (Codex, Cursor, Gemini, OpenCode)
+
+Install via the [skills.sh](https://skills.sh) CLI:
+
+```bash
+npx skills add floflo11/mbb-decks
+```
+
 ## Star to follow
 
 <p align="center">
