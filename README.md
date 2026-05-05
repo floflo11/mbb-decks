@@ -23,34 +23,17 @@ Both decks are committed to the repo. Open them in PowerPoint or Keynote and fli
 
 ## Install
 
-If you do not have Claude Code, get it first:
-
 ```bash
-curl -fsSL https://claude.com/install.sh | sh
+npx skills add floflo11/mbb-decks
 ```
 
-Then open Claude Code (run `claude` in your terminal) and paste both lines:
-
-```
-/plugin marketplace add floflo11/mbb-decks
-/plugin install mbb-decks
-```
-
-Now prompt:
+Pick your agent when prompted — Claude Code, Codex, Cursor, Gemini, OpenCode, and others are all supported. Then prompt:
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
 The first time the skill runs it self-checks for Python and `python-pptx` and tells you the one command to run if anything is missing.
 
-> This skill is built for CLI agents (Claude Code, Codex CLI, Gemini CLI, Cursor). The `SKILL.md` format is an open standard at [agentskills.io](https://agentskills.io/specification), so the same skill works across them. A hosted web version for users who are not on a CLI agent is on the roadmap.
-
-### Other agents (Codex, Cursor, Gemini, OpenCode)
-
-Install via the [skills.sh](https://skills.sh) CLI:
-
-```bash
-npx skills add floflo11/mbb-decks
-```
+> The `SKILL.md` format is an open standard at [agentskills.io](https://agentskills.io/specification), so the same skill works across every CLI agent. A hosted web version for users who are not on a CLI agent is on the roadmap.
 
 ## Star to follow
 
