@@ -1,3 +1,5 @@
+
+
 # MBB Decks
 
 [![Star on GitHub](https://img.shields.io/github/stars/floflo11/mbb-decks?style=social)](https://github.com/floflo11/mbb-decks/stargazers)
@@ -31,7 +33,7 @@ Pick your agent when prompted — Claude Code, Codex, Cursor, Gemini, OpenCode, 
 
 > Build me an MBB-style deck on [your topic]. Use the mbb-decks skill.
 
-The first time the skill runs it self-checks for Python and `python-pptx` and tells you the one command to run if anything is missing.
+The first time the skill runs it self-checks for Python 3.9+ and `python-pptx` and tells you the one command to run if anything is missing.
 
 > The `SKILL.md` format is an open standard at [agentskills.io](https://agentskills.io/specification), so the same skill works across every CLI agent. A hosted web version for users who are not on a CLI agent is on the roadmap.
 
